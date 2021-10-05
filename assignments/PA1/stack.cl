@@ -8,7 +8,7 @@
  *)
 
 class Main inherits IO {
-  m_head : StackCommand;
+  m_head : StackCommand <- (new TailCommand);
 
    main() : Object {
      {
@@ -35,7 +35,7 @@ class Main inherits IO {
    displayStack() : Object {
      {
        let temp_head : StackCommand <- m_head in
-         while (not isvoid temp_head) loop {
+         while (not temp_head.isTail()) loop {
            out_string(temp_head.commandString());
            out_string(" ");
            temp_head <- temp_head.next();
@@ -59,6 +59,10 @@ class StackCommand {
   };
 
   isInt() : Bool {
+    false
+  };
+
+  isTail() : Bool {
     false
   };
 
@@ -131,4 +135,14 @@ class PlusCommand inherits StackCommand {
         (new IntCommand).initIntCommand(third, stringSum)
   };
 
+};
+
+class TailCommand inherits StackCommand {
+  eval() : StackCommand {
+    self
+  };
+
+  isTail() : Bool {
+    true
+  };
 };
