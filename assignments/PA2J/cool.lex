@@ -76,6 +76,31 @@ import java_cup.runtime.Symbol;
                                      here, after the last %% separator */
                                   return new Symbol(TokenConstants.DARROW); }
 
+<YYINITIAL>[ \n\t\v\f\r] { }
+<YYINITIAL>[eE][lL][sS][eE] { return new Symbol(TokenConstants.ELSE); }
+<YYINITIAL>[fF][iI] { return new Symbol(TokenConstants.FI); }
+<YYINITIAL>[iI][fF] { return new Symbol(TokenConstants.IF); }
+<YYINITIAL>[iI][nN] { return new Symbol(TokenConstants.IN); }
+<YYINITIAL>[iI][nN][hH][eE][rR][iI][tT][sS] { return new Symbol(TokenConstants.INHERITS); }
+<YYINITIAL>[iI][sS][vV][oO][iI][dD] { return new Symbol(TokenConstants.ISVOID); }
+<YYINITIAL>[lL][eE][tT] { return new Symbol(TokenConstants.LET); }
+<YYINITIAL>[lL][oO][oO][pP] { return new Symbol(TokenConstants.LOOP); }
+<YYINITIAL>[pP][oO][oO][lL] { return new Symbol(TokenConstants.POOL); }
+<YYINITIAL>[tT][hH][eE][nN] { return new Symbol(TokenConstants.THEN); }
+<YYINITIAL>[wW][hH][iI][lL][eE] { return new Symbol(TokenConstants.WHILE); }
+<YYINITIAL>[cC][aA][sS][eE] { return new Symbol(TokenConstants.CASE); }
+<YYINITIAL>[eE][sS][aA][cC] { return new Symbol(TokenConstants.ESAC); }
+<YYINITIAL>[nN][eE][wW] { return new Symbol(TokenConstants.NEW); }
+<YYINITIAL>[oO][fF] { return new Symbol(TokenConstants.OF); }
+<YYINITIAL>[nN][oO][tT] { return new Symbol(TokenConstants.NOT); }
+<YYINITIAL>"false" { return new Symbol(TokenConstants.BOOL_CONST, new java.lang.Boolean(false));}
+<YYINITIAL>"true" { return new Symbol(TokenConstants.BOOL_CONST, new java.lang.Boolean(true));}
+
+<YYINITIAL>[cC][lL][aA][sS][sS]  {
+   return new Symbol(TokenConstants.CLASS);
+ }
+
+
 .                               { /* This rule should be the very last
                                      in your lexical specification and
                                      will match match everything not
