@@ -71,11 +71,6 @@ import java_cup.runtime.Symbol;
 
 %%
 
-<YYINITIAL>"=>"			{ /* Sample lexical rule for "=>" arrow.
-                                     Further lexical rules should be defined
-                                     here, after the last %% separator */
-                                  return new Symbol(TokenConstants.DARROW); }
-
 <YYINITIAL>[ \n\t\v\f\r] { }
 <YYINITIAL>[eE][lL][sS][eE] { return new Symbol(TokenConstants.ELSE); }
 <YYINITIAL>[fF][iI] { return new Symbol(TokenConstants.FI); }
@@ -95,10 +90,41 @@ import java_cup.runtime.Symbol;
 <YYINITIAL>[nN][oO][tT] { return new Symbol(TokenConstants.NOT); }
 <YYINITIAL>"false" { return new Symbol(TokenConstants.BOOL_CONST, new java.lang.Boolean(false));}
 <YYINITIAL>"true" { return new Symbol(TokenConstants.BOOL_CONST, new java.lang.Boolean(true));}
-
 <YYINITIAL>[cC][lL][aA][sS][sS]  {
    return new Symbol(TokenConstants.CLASS);
  }
+<YYINITIAL>"+" {return new Symbol(TokenConstants.PLUS); }
+<YYINITIAL>"-" {return new Symbol(TokenConstants.MINUS); }
+<YYINITIAL>"*" {return new Symbol(TokenConstants.MULT); }
+<YYINITIAL>"/" {return new Symbol(TokenConstants.DIV); }
+<YYINITIAL>"<" {return new Symbol(TokenConstants.LT); }
+<YYINITIAL>"<=" {return new Symbol(TokenConstants.LE); }
+<YYINITIAL>"=" {return new Symbol(TokenConstants.EQ);}
+<YYINITIAL>"<-" {return new Symbol(TokenConstants.ASSIGN);}
+<YYINITIAL>"~" {return new Symbol(TokenConstants.NEG); }
+<YYINITIAL>"+" {return new Symbol(TokenConstants.PLUS); }
+<YYINITIAL>":" {return new Symbol(TokenConstants.COLON); }
+<YYINITIAL>"(" {return new Symbol(TokenConstants.LPAREN); }
+<YYINITIAL>")" {return new Symbol(TokenConstants.RPAREN); }
+<YYINITIAL>"{" {return new Symbol(TokenConstants.LBRACE); }
+<YYINITIAL>"}" {return new Symbol(TokenConstants.RBRACE); }
+<YYINITIAL>"." {return new Symbol(TokenConstants.DOT); }
+<YYINITIAL>"@" {return new Symbol(TokenConstants.AT); }
+<YYINITIAL>";" {return new Symbol(TokenConstants.SEMI); }
+<YYINITIAL>"," {return new Symbol(TokenConstants.COMMA); }
+<YYINITIAL>"=>" {return new Symbol(TokenConstants.DARROW); }
+<YYINITIAL>[A-Z][0-9a-zA-Z_]* {
+  AbstractSymbol sym = AbstractTable.idtable.addString(yytext());
+  return new Symbol(TokenConstants.TYPEID, sym);
+}
+<YYINITIAL>[a-z][0-9a-zA-Z_]* {
+  AbstractSymbol sym = AbstractTable.idtable.addString(yytext());
+  return new Symbol(TokenConstants.OBJECTID, sym);
+}
+<YYINITIAL>[0-9]* {
+  AbstractSymbol sym = AbstractTable.inttable.addString(yytext());
+  return new Symbol(TokenConstants.INT_CONST, sym);
+}
 
 
 .                               { /* This rule should be the very last
